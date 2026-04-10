@@ -8,54 +8,63 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{
-  background:#0f0f23;
-  background:linear-gradient(135deg,#0f0f23 0%,#1a0b2e 50%,#16213e 100%);
-  color:#e5e5e5;
+  background:#0a0a0a;
+  color:#e0e0e0;
   font-family:system-ui,-apple-system,sans-serif;
   padding:40px 20px;
   min-height:100vh;
   position:relative;
+  overflow-x:hidden;
 }
 body::before{
   content:'';
   position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
+  top:-50%;
+  left:-50%;
+  width:200%;
+  height:200%;
   background:
-    radial-gradient(circle at 20% 30%,rgba(59,130,246,0.15) 0%,transparent 50%),
-    radial-gradient(circle at 80% 70%,rgba(168,85,247,0.15) 0%,transparent 50%),
-    radial-gradient(circle at 50% 50%,rgba(236,72,153,0.1) 0%,transparent 50%);
+    radial-gradient(circle at 30% 20%,rgba(0,255,157,0.08) 0%,transparent 40%),
+    radial-gradient(circle at 70% 80%,rgba(0,255,157,0.06) 0%,transparent 40%);
   pointer-events:none;
   z-index:0;
+  animation:drift 20s ease-in-out infinite;
+}
+@keyframes drift{
+  0%,100%{transform:translate(0,0) rotate(0deg)}
+  50%{transform:translate(30px,30px) rotate(5deg)}
 }
 .wrap{max-width:900px;margin:0 auto;position:relative;z-index:1}
 header{margin-bottom:50px;text-align:center}
 h1{
-  font-size:48px;
-  margin-bottom:10px;
-  background:linear-gradient(135deg,#60a5fa 0%,#a78bfa 50%,#f472b6 100%);
+  font-size:56px;
+  margin-bottom:15px;
+  background:linear-gradient(135deg,#00ff9d 0%,#00cc7d 100%);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
   background-clip:text;
-  font-weight:800;
-  letter-spacing:-1px;
+  font-weight:900;
+  letter-spacing:-2px;
+  text-shadow:0 0 40px rgba(0,255,157,0.3);
+  animation:glow 3s ease-in-out infinite;
+}
+@keyframes glow{
+  0%,100%{filter:brightness(1)}
+  50%{filter:brightness(1.2)}
 }
 .subtitle{
-  color:#94a3b8;
-  font-size:16px;
-  font-weight:300;
+  color:#6b7280;
+  font-size:17px;
+  font-weight:400;
+  letter-spacing:0.5px;
 }
 .mods{display:flex;flex-direction:column;gap:20px;margin-bottom:60px}
 .card{
-  background:rgba(15,23,42,0.6);
-  backdrop-filter:blur(10px);
-  border:2px solid;
-  border-radius:16px;
-  padding:24px;
-  transition:all 0.3s;
-  box-shadow:0 8px 32px rgba(0,0,0,0.4);
+  background:#141414;
+  border-radius:12px;
+  padding:28px;
+  transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
+  box-shadow:0 4px 24px rgba(0,0,0,0.5);
   position:relative;
   overflow:hidden;
 }
@@ -63,26 +72,21 @@ h1{
   content:'';
   position:absolute;
   top:0;
-  left:0;
-  right:0;
-  height:3px;
-  background:linear-gradient(90deg,transparent,currentColor,transparent);
-  opacity:0.6;
+  left:-100%;
+  width:100%;
+  height:2px;
+  background:#00ff9d;
+  transition:left 0.5s;
+  z-index:1;
 }
-.card-blue{border-color:#3b82f6;color:#3b82f6}
-.card-purple{border-color:#a855f7;color:#a855f7}
-.card-pink{border-color:#ec4899;color:#ec4899}
-.card-orange{border-color:#f97316;color:#f97316}
-.card-cyan{border-color:#06b6d4;color:#06b6d4}
+.card:hover::before{
+  left:100%;
+}
 .card:hover{
-  transform:scale(1.02);
-  box-shadow:0 12px 48px rgba(0,0,0,0.6);
+  transform:scale(1.03);
+  box-shadow:0 12px 40px rgba(0,255,157,0.15);
+  background:#1a1a1a;
 }
-.card-blue:hover{box-shadow:0 12px 48px rgba(59,130,246,0.3);}
-.card-purple:hover{box-shadow:0 12px 48px rgba(168,85,247,0.3);}
-.card-pink:hover{box-shadow:0 12px 48px rgba(236,72,153,0.3);}
-.card-orange:hover{box-shadow:0 12px 48px rgba(249,115,22,0.3);}
-.card-cyan:hover{box-shadow:0 12px 48px rgba(6,182,212,0.3);}
 .card-header{
   display:flex;
   justify-content:flex-start;
@@ -97,21 +101,26 @@ h1{
   letter-spacing:-0.5px;
 }
 .badge{
-  font-size:11px;
-  font-weight:700;
-  padding:6px 12px;
-  border-radius:6px;
-  background:linear-gradient(135deg,#fbbf24,#f59e0b);
+  font-size:10px;
+  font-weight:800;
+  padding:7px 14px;
+  border-radius:20px;
+  background:#00ff9d;
   color:#000;
   text-transform:uppercase;
-  letter-spacing:0.5px;
-  box-shadow:0 4px 12px rgba(251,191,36,0.4);
+  letter-spacing:1px;
+  box-shadow:0 0 20px rgba(0,255,157,0.5);
   white-space:nowrap;
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{box-shadow:0 0 20px rgba(0,255,157,0.5)}
+  50%{box-shadow:0 0 30px rgba(0,255,157,0.8)}
 }
 .mod-desc{
-  color:#cbd5e1;
+  color:#9ca3af;
   font-size:15px;
-  line-height:1.7;
+  line-height:1.8;
   margin-bottom:20px;
 }
 .mod-footer{
@@ -124,35 +133,51 @@ h1{
 .mod-info{
   display:flex;
   gap:12px;
-  font-size:14px;
-  font-weight:600;
-}
-.dl{
-  background:linear-gradient(135deg,#3b82f6,#8b5cf6);
-  color:#fff;
-  padding:12px 28px;
-  border-radius:10px;
-  text-decoration:none;
-  font-size:14px;
-  font-weight:600;
-  transition:all 0.3s;
-  border:none;
-  box-shadow:0 4px 20px rgba(59,130,246,0.4);
-  text-transform:uppercase;
+  font-size:13px;
+  font-weight:700;
+  color:#00ff9d;
   letter-spacing:0.5px;
 }
+.dl{
+  background:#00ff9d;
+  color:#000;
+  padding:13px 32px;
+  border-radius:8px;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:800;
+  transition:all 0.3s;
+  border:none;
+  box-shadow:0 0 25px rgba(0,255,157,0.4);
+  text-transform:uppercase;
+  letter-spacing:1px;
+  position:relative;
+  overflow:hidden;
+}
+.dl::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(45deg,transparent,rgba(255,255,255,0.3),transparent);
+  transform:translateX(-100%);
+  transition:transform 0.6s;
+}
+.dl:hover::before{
+  transform:translateX(100%);
+}
 .dl:hover{
-  background:linear-gradient(135deg,#60a5fa,#a78bfa);
+  background:#00cc7d;
   transform:scale(1.05);
-  box-shadow:0 6px 30px rgba(96,165,250,0.6);
+  box-shadow:0 0 35px rgba(0,255,157,0.7);
 }
 footer{
   text-align:center;
-  padding-top:40px;
-  border-top:2px solid rgba(59,130,246,0.2);
-  color:#64748b;
-  font-size:14px;
-  font-weight:300;
+  padding-top:50px;
+  border-top:1px solid #2a2a2a;
+  color:#4b5563;
+  font-size:13px;
+  font-weight:400;
+  letter-spacing:0.5px;
 }
 @media(max-width:600px){
   h1{font-size:36px}
@@ -166,7 +191,8 @@ footer{
 <div class="wrap">
   <header>
     <h1>kqFiles</h1>
-    <p class="subtitle">Mody kaqvu dla Minecraft</p>
+    <p class="subtitle">MODS</p>
+    <p class="subtitle" style="color:#00ff9d;font-weight:600;margin-top:5px">by kaqvu</p>
   </header>
   
   <div class="mods">
