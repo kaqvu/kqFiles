@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+next-env.d.ts
+
+# Lock files
+package-lock.json
+pnpm-lock.yaml
+
+# IDE
+.vscode/
+
+# Script
+clean-temp.bat
